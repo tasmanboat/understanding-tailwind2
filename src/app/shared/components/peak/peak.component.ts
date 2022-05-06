@@ -16,7 +16,16 @@ export class PeakComponent implements OnInit {
 
   ngOnInit(): void {
     const recordsUrl = 'api/todos';
-    this.records$ = this.http.get<Todo[]>(recordsUrl).pipe(
+    this.records$ = this.getRecords();
+  }
+
+  onClicked(e: any): void {
+    this.records$ = this.getRecords();
+  }
+
+  private getRecords(): Observable<Todo[]> {
+    const recordsUrl = 'api/todos';
+    return this.http.get<Todo[]>(recordsUrl).pipe(
       // catchError(error => { throw new Error(error) }),
       catchError(error => {
         // throw new Error(error)
