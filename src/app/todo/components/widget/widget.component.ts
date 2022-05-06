@@ -1,4 +1,5 @@
 import { Component, OnInit } from '@angular/core';
+import { NgForm } from '@angular/forms';
 import { Observable, BehaviorSubject } from 'rxjs';
 import { tap, map, switchMap, first } from 'rxjs/operators';
 import { Todo } from '../../interfaces/todo';
@@ -18,7 +19,7 @@ export class WidgetComponent implements OnInit {
 
 // #region records and filtered records
 // an event will trigger filtering of todos
-  filter$: BehaviorSubject<Filter> = new BehaviorSubject<Filter>('all');
+  filter$: BehaviorSubject<Filter> = new BehaviorSubject<Filter>('completed');
   // updateFilter
   updateFilter(e: any) {
     const filter = e.target.value as Filter;
@@ -61,7 +62,7 @@ export class WidgetComponent implements OnInit {
   filters: Filter[] = ['all', 'completed', 'uncompleted'];
 // #endregion
 
-// #region toggle checkbox
+// #region update a record by toggling checkbox
 // modify the copied record and update with the copied & modified record
 // leave the original record alone, which is to be updated by new server data
   toggle(e: any, record: Todo) {
@@ -71,10 +72,32 @@ export class WidgetComponent implements OnInit {
   }
 // #endregion
 
-// #region todo count
-todoCount$: Observable<number> = this.service.getRecords().pipe(
-  map((records: Todo[]) => records.length)
-)
+// #region update a record by editing
+  onBlur(e: any, record: Todo) {
+    const _record = {...record};
+    _record.content = e.target.textContent;
+    this.service.updateRecord(_record).subscribe();
+  }
+// #endregion
+
+// #region record count
+  todoCount$: Observable<number> = this.service.getRecords().pipe(
+    map((records: Todo[]) => records.length)
+  )
+// #endregion
+
+// #region add a record
+  todo: Todo = { content: '', isCompleted: false } as Todo;
+  onSubmit() {
+    this.service.addRecord(this.todo).subscribe();
+    this.todo = { content: '', isCompleted: false } as Todo;
+  }
+// #endregion
+
+// #region delete a record
+  delete(id: number) {
+    this.service.deleteRecord(id).subscribe();
+  }
 // #endregion
 
 }

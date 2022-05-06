@@ -1,18 +1,32 @@
 <ng-container *ngIf="todos$ | async as todos">
-<div class="min-h-[300px] bg-purple-200">
-  <div id="filter">
+<div class="min-h-[300px] flex flex-col gap-4 bg-gray-200">
+  <div id="filter-bar">
     <form>
       <ng-container *ngFor="let filter of filters">
-        <label [for]="filter"><input type="radio" name="filter" [id]="filter" (click)="updateFilter($event)" [value]="filter" checked />{{ filter }} </label>
+        <label [for]="filter"><input type="radio" name="filter" [id]="filter" [value]="filter" (click)="updateFilter($event)" [checked]="(filter$|async) === filter" />{{ filter }} </label>
       </ng-container>
     </form>
   </div>
-  <div>
-    <b>{{ todoCount$ | async }}</b>
+  <div id="table">
+    <b>{{ todoCount$ | async }} in total</b>
     <ul>
-      <li *ngFor="let todo of todos; trackBy: trackById; index as i">{{ todo.id }} {{ todo.content }} (created at {{ todo.created_at+'000' | dateAgo }})(updated at {{ todo.updated_at+'000' | dateAgo }})
-        <input type="checkbox" [checked]="todo.isCompleted" (change)="toggle($event, todo)" /></li>
+      <li *ngFor="let todo of todos; trackBy: trackById; index as i">{{ todo.id }}
+        <span contenteditable="true"
+          [textContent]="todo.content"
+          [class.completed]="todo.isCompleted"
+          (blur)="onBlur($event, todo)"></span>
+        <span>(created at {{ todo.created_at+'000' | dateAgo }})(updated at {{ todo.updated_at+'000' | dateAgo }})</span>
+        <input type="checkbox" [checked]="todo.isCompleted" (change)="toggle($event, todo)" />
+        <button (click)="delete(todo.id)" class="btn btn-xs btn-ghost">x</button>
+      </li>
     </ul>
+  </div>
+  <div id="add-bar">
+    <form (ngSubmit)="onSubmit()">
+      <input type="text" name="content" [(ngModel)]="todo.content" />
+      <input type="checkbox" name="isCompleted" [(ngModel)]="todo.isCompleted" />
+      <input type="submit" value="Submit" class="btn btn-xs btn-ghost" />
+    </form>
   </div>
 </div>
 <pre>{{ todos | json }}</pre>
