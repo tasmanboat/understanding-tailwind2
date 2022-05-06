@@ -18,10 +18,11 @@ export class WidgetComponent implements OnInit {
 
 // #region records and filtered records
 // an event will trigger filtering of todos
-  filter$: BehaviorSubject<Filter> = new BehaviorSubject<Filter>(`all`);
+  filter$: BehaviorSubject<Filter> = new BehaviorSubject<Filter>('all');
   // updateFilter
-  onFiltered(filter: string) {
-    this.filter$.next(filter as Filter);
+  updateFilter(e: any) {
+    const filter = e.target.value as Filter;
+    this.filter$.next(filter);
   }
   todos$: Observable<Todo[]> = this.filter$.pipe(
     switchMap((filter: Filter) => {
@@ -50,7 +51,31 @@ export class WidgetComponent implements OnInit {
   )
 // #endregion
 
+// #region trackById
+  trackById(index: number, record: Todo): number {
+    return record.id;
+  }
+// #endregion
 
+// #region filters
+  filters: Filter[] = ['all', 'completed', 'uncompleted'];
+// #endregion
+
+// #region toggle checkbox
+// modify the copied record and update with the copied & modified record
+// leave the original record alone, which is to be updated by new server data
+  toggle(e: any, record: Todo) {
+    const _record = {...record};
+    _record.isCompleted = e.target.checked;
+    this.service.updateRecord(_record).subscribe();
+  }
+// #endregion
+
+// #region todo count
+todoCount$: Observable<number> = this.service.getRecords().pipe(
+  map((records: Todo[]) => records.length)
+)
+// #endregion
 
 }
 

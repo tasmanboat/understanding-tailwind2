@@ -27,12 +27,14 @@ export class TodoService {
   }
 
   updateRecord(record: Todo): Observable<any> {
-    return this.apiService.updateRecord(record).pipe(tap(_ => this.loadRecords()))
+    const timestamp = String(Date.now()).slice(0, -3);
+    const modifiedRecord: Todo = { ...record, updated_at: +timestamp };
+    return this.apiService.updateRecord(modifiedRecord).pipe(tap(_ => this.loadRecords()))
   }
 
   addRecord(record: Todo): Observable<Todo> {
     const timestamp = String(Date.now()).slice(0, -3);
-    const modifiedRecord: Todo = { content: record.content, isCompleted: record.isCompleted, created_at: +timestamp, updated_at: +timestamp } as Todo;
+    const modifiedRecord: Todo = { ...record, created_at: +timestamp, updated_at: +timestamp };
     return this.apiService.addRecord(modifiedRecord).pipe(tap(_ => this.loadRecords()))
   }
 

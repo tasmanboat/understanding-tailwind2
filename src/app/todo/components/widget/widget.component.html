@@ -1,9 +1,20 @@
 <ng-container *ngIf="todos$ | async as todos">
+<div class="min-h-[300px] bg-purple-200">
+  <div id="filter">
+    <form>
+      <ng-container *ngFor="let filter of filters">
+        <label [for]="filter"><input type="radio" name="filter" [id]="filter" (click)="updateFilter($event)" [value]="filter" checked />{{ filter }} </label>
+      </ng-container>
+    </form>
+  </div>
   <div>
-    <p>{{ todos.length }}</p>
+    <b>{{ todoCount$ | async }}</b>
     <ul>
-      <li *ngFor="let todo of todos">{{ todo.content }}</li>
+      <li *ngFor="let todo of todos; trackBy: trackById; index as i">{{ todo.id }} {{ todo.content }} (created at {{ todo.created_at+'000' | dateAgo }})(updated at {{ todo.updated_at+'000' | dateAgo }})
+        <input type="checkbox" [checked]="todo.isCompleted" (change)="toggle($event, todo)" /></li>
     </ul>
   </div>
+</div>
+<pre>{{ todos | json }}</pre>
 </ng-container>
-<app-peak></app-peak>
+<!-- <app-peak></app-peak> -->
