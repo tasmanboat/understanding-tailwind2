@@ -1,1 +1,8 @@
-<p>peak works!</p>
+<div *ngIf="records$ | async as records; else loading">
+  <pre>{{ records.length }} in total</pre>
+  <pre>{{ records | json }}</pre>
+</div>
+
+<ng-template #loading>
+  <div class="my-4 mx-4 bg-yellow-200"><p class="font-serif italic">loading ...</p></div>
+</ng-template>

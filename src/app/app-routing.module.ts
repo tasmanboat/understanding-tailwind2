@@ -11,6 +11,13 @@ const routes: Routes = [
   // { path: '', redirectTo: 'todo', pathMatch: 'full' },
   {
     path: '',
+    component: LayoutAppComponent,
+    children: [
+      { path: '', loadChildren: () => import('src/app/todo/todo.module').then(m => m.TodoModule) },
+    ]
+  },
+  {
+    path: '',
     component: LayoutDefaultComponent,
     children: [
       { path: 'peak', component: PeakComponent },
