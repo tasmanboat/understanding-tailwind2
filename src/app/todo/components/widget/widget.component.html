@@ -1,2 +1,9 @@
-<p>widget works!</p>
+<ng-container *ngIf="todos$ | async as todos">
+  <div>
+    <p>{{ todos.length }}</p>
+    <ul>
+      <li *ngFor="let todo of todos">{{ todo.content }}</li>
+    </ul>
+  </div>
+</ng-container>
 <app-peak></app-peak>
