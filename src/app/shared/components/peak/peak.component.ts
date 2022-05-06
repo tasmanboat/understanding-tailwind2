@@ -3,6 +3,7 @@ import { HttpClient, HttpHeaders } from '@angular/common/http';
 import { Observable, of } from 'rxjs';
 import { tap, map, catchError, delay } from 'rxjs/operators';
 import { Todo } from 'src/app/todo/interfaces/todo';
+import { TodoService } from 'src/app/todo/services/todo.service';
 
 @Component({
   selector: 'app-peak',
@@ -12,15 +13,20 @@ import { Todo } from 'src/app/todo/interfaces/todo';
 export class PeakComponent implements OnInit {
 
   records$?: Observable<Todo[]>;
-  constructor(private http: HttpClient) { }
+  constructor(
+    private http: HttpClient,
+    private service: TodoService,
+  ) { }
 
   ngOnInit(): void {
     const recordsUrl = 'api/todos';
-    this.records$ = this.getRecords();
+    this.records$ = this.getRecords(); // manually get new data
+    // this.records$ = this.service.getRecords(); // auto get new data
   }
 
   onClicked(e: any): void {
-    this.records$ = this.getRecords();
+    this.records$ = this.getRecords(); // manually get new data
+    // this.records$ = this.service.getRecords(); // auto get new data
   }
 
   private getRecords(): Observable<Todo[]> {
