@@ -13,7 +13,7 @@ const routes: Routes = [
     path: '',
     component: LayoutAppComponent,
     children: [
-      { path: '', loadChildren: () => import('src/app/todo/todo.module').then(m => m.TodoModule) },
+      { path: 'todo', loadChildren: () => import('src/app/todo/todo.module').then(m => m.TodoModule) },
     ]
   },
   {
