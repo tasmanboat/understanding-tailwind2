@@ -15,7 +15,7 @@ export class MarkdownPipe implements PipeTransform {
       const html = linkRenderer.call(renderer, href, title, text);
       return localLink ? html : html.replace(/^<a /, `<a target="_blank" rel="noreferrer noopener nofollow" `);
     };
-    if (value && value.length > 0) {
+    if (value?.length > 0) {
       return marked(value, { renderer: renderer });
     }
     return value;
