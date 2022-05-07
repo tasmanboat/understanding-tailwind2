@@ -1,5 +1,5 @@
 <ng-container *ngIf="todos$ | async as todos">
-<div class="min-h-[300px] flex flex-col gap-4 bg-gray-200">
+<div class="min-h-[300px] max-w-[600px] flex flex-col gap-4 py-4 bg-gray-200">
   <div id="filter-bar">
     <form>
       <ng-container *ngFor="let filter of filters">

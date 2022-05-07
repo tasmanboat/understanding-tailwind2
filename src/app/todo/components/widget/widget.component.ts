@@ -1,5 +1,4 @@
 import { Component, OnInit } from '@angular/core';
-import { NgForm } from '@angular/forms';
 import { Observable, BehaviorSubject } from 'rxjs';
 import { tap, map, switchMap, first } from 'rxjs/operators';
 import { Todo } from '../../interfaces/todo';
@@ -75,6 +74,7 @@ export class WidgetComponent implements OnInit {
 // #endregion
 
 // #region update a record by editing
+// check if there is an update, if there is, make a POST request
 
   onBlur(e: any, record: Todo) {
     if (record.content !== e.target.textContent) {
@@ -93,6 +93,7 @@ export class WidgetComponent implements OnInit {
 // #endregion
 
 // #region add a record
+// trim the input
 
   todo: Todo = { content: '', isCompleted: false } as Todo;
   onSubmit() {
