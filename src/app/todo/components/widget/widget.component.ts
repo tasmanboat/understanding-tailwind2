@@ -66,19 +66,25 @@ export class WidgetComponent implements OnInit {
 // modify the copied record and update with the copied & modified record
 // leave the original record alone, which is to be updated by new server data
   toggle(e: any, record: Todo) {
-    const _record = {...record};
-    _record.isCompleted = e.target.checked;
-    this.service.updateRecord(_record).subscribe();
+    if (record.isCompleted !== e.target.checked) {
+      const _record = {...record};
+      _record.isCompleted = e.target.checked;
+      this.service.updateRecord(_record).subscribe();
+    }
   }
 // #endregion
 
 // #region update a record by editing
+
   onBlur(e: any, record: Todo) {
-    const _record = {...record};
-    _record.content = e.target.textContent;
-    this.service.updateRecord(_record).subscribe();
+    if (record.content !== e.target.textContent) {
+      const _record = {...record};
+      _record.content = e.target.textContent;
+      this.service.updateRecord(_record).subscribe();
+    }
   }
-// #endregion
+
+  // #endregion
 
 // #region record count
   todoCount$: Observable<number> = this.service.getRecords().pipe(
@@ -87,11 +93,15 @@ export class WidgetComponent implements OnInit {
 // #endregion
 
 // #region add a record
+
   todo: Todo = { content: '', isCompleted: false } as Todo;
   onSubmit() {
-    this.service.addRecord(this.todo).subscribe();
-    this.todo = { content: '', isCompleted: false } as Todo;
+    if (this.todo.content.trim()) {
+      this.service.addRecord(this.todo).subscribe();
+      this.todo = { content: '', isCompleted: false } as Todo;
+    }
   }
+
 // #endregion
 
 // #region delete a record

@@ -24,7 +24,7 @@
   <div id="add-bar">
     <form (ngSubmit)="onSubmit()">
       <input type="text" name="content" [(ngModel)]="todo.content" />
-      <input type="checkbox" name="isCompleted" [(ngModel)]="todo.isCompleted" />
+      <input type="checkbox" name="isCompleted" [(ngModel)]="todo.isCompleted" class="mx-4" />
       <input type="submit" value="Submit" class="btn btn-xs btn-ghost" />
     </form>
   </div>
