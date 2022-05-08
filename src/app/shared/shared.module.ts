@@ -11,6 +11,7 @@ import { MarkdownPipe } from './pipes/markdown.pipe';
 
 import { PageNotFoundComponent } from './components/page-not-found/page-not-found.component';
 import { PeakComponent } from './components/peak/peak.component';
+import { ModalComponent } from './components/modal/modal.component';
 
 
 @NgModule({
@@ -20,6 +21,7 @@ import { PeakComponent } from './components/peak/peak.component';
     MarkdownPipe,
     PageNotFoundComponent,
     PeakComponent,
+    ModalComponent,
   ],
   imports: [
     CommonModule,
@@ -33,6 +35,7 @@ import { PeakComponent } from './components/peak/peak.component';
     MarkdownPipe,
     PageNotFoundComponent,
     PeakComponent,
+    ModalComponent,
   ],
 })
 export class SharedModule { }
