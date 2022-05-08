@@ -1,0 +1,51 @@
+<div class="min-h-80 w-[600px] bg-gray-200 rounded-2xl p-4 my-4">
+  <h2 class="text-4xl font-bold m-4">Title*</h2>
+  <div id="filter-bar" class="text-right" *ngIf="filter$ | async as filter">
+    <select class="select" (change)="updateFilter($event)">
+      <option value="all" [selected]="filter==='all'">all</option>
+      <option value="completed" [selected]="filter==='completed'">completed</option>
+      <option value="uncompleted" [selected]="filter==='uncompleted'">uncompleted</option>
+    </select>
+  </div>
+  <div id="table" class="my-4 overflow-x-auto">
+  <ng-container *ngIf="todos$ | async as todos">
+    <table class="table table-fixed w-full">
+      <!-- head -->
+      <thead>
+        <tr class="">
+          <th class="text-xl w-4 text-center">#</th>
+          <th class="w-4"></th>
+          <th class="text-xl w-36 text-center">content</th>
+          <th class="w-4"></th>
+        </tr>
+      </thead>
+      <tbody>
+        <!-- rows -->
+        <tr *ngFor="let todo of todos; trackBy: trackById; index as i" class="border-y-2 border-yellow-50">
+          <th class="text-center">{{ todo.id }}</th>
+          <td class=""><input type="checkbox" class="checkbox" [checked]="todo.isCompleted" (change)="toggle($event, todo)" /></td>
+          <td class="text-xl text-left font-serif">
+            <span [attr.contenteditable]="editable"
+              [textContent]="todo.content"
+              [class.completed]="todo.isCompleted"
+              class="break-words"
+              (blur)="onBlur($event, todo)"></span>
+          </td>
+          <td class=""><button class="btn btn-ghost" (click)="delete($event, todo.id)">✕</button></td>
+        </tr>
+      </tbody>
+    </table>
+  </ng-container>
+  </div>
+  <div id="add-bar">
+    <form (ngSubmit)="onSubmit()" class="flex">
+      <input type="text" name="content" [(ngModel)]="todo.content" placeholder="Type here" class="input font-serif flex-auto" />
+      <input type="checkbox" name="isCompleted" [(ngModel)]="todo.isCompleted" class="checkbox checkbox-md place-self-center mx-4" />
+      <button type="submit" class="btn btn-ghost" [disabled]="lock">Submit</button>
+    </form>
+  </div>
+  <div class="bg-slate-400">
+    <pre *ngIf="todos$ | async as todos">{{ todos | json }}</pre>
+  </div>
+</div>
+

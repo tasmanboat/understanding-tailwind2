@@ -1,0 +1,6 @@
+
+undesirable result when a row is updated:
+
+why undesirable: the row should lock its checkbox and content edit bar, and unlock when it receive a new record
+
+why undesirable: the row should lock itself only, not lock all the rows
