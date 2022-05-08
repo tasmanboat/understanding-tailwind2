@@ -12,4 +12,11 @@ export class HeaderComponent implements OnInit {
   ngOnInit(): void {
   }
 
+// #region modal
+  showModal: boolean = false;
+  toggleModal = () => {
+    this.showModal = !this.showModal;
+  }
+// #endregion
+
 }
