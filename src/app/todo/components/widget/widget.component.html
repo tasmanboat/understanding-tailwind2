@@ -13,8 +13,8 @@
       <li *ngFor="let todo of todos; trackBy: trackById; index as i">{{ todo.id }}
         <span contenteditable="true"
           [textContent]="todo.content"
-          [class.completed]="todo.isCompleted"
-          (blur)="onBlur($event, todo)"></span>
+          (blur)="onBlur($event, todo)"
+          [class.completed]="todo.isCompleted"></span>
         <span>(created at {{ todo.created_at+'000' | dateAgo }})(updated at {{ todo.updated_at+'000' | dateAgo }})</span>
         <input type="checkbox" [checked]="todo.isCompleted" (change)="toggle($event, todo)" />
         <button (click)="delete(todo.id)" class="btn btn-xs btn-ghost">x</button>

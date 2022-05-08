@@ -5,8 +5,8 @@ import { Todo } from '../../interfaces/todo';
 import { TodoService } from '../../services/todo.service';
 
 // a todo widget
-// full functionality (GET, POST, PUT)
-// cannot set lock state for each todo item
+// full functionality (GET, POST, PUT, DELETE)
+// not set lock state for each todo item
 
 @Component({
   selector: 'app-widget2',

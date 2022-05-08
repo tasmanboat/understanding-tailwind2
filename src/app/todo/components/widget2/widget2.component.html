@@ -27,9 +27,9 @@
           <td class="text-xl text-left font-serif">
             <span [attr.contenteditable]="editable"
               [textContent]="todo.content"
+              (blur)="onBlur($event, todo)"
               [class.completed]="todo.isCompleted"
-              class="break-words"
-              (blur)="onBlur($event, todo)"></span>
+              class="break-words"></span>
           </td>
           <td class=""><button class="btn btn-ghost" (click)="delete($event, todo.id)">✕</button></td>
         </tr>

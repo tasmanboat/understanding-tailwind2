@@ -4,6 +4,10 @@ import { tap, map, switchMap, first } from 'rxjs/operators';
 import { Todo } from '../../interfaces/todo';
 import { TodoService } from '../../services/todo.service';
 
+// a todo widget
+// full functionality (GET, POST, PUT, DELETE)
+// not set UI state according to web data loading / loaded state switch
+
 @Component({
   selector: 'app-widget',
   templateUrl: './widget.component.html',
