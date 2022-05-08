@@ -8,7 +8,7 @@ import { PageNotFoundComponent } from 'src/app/shared/components/page-not-found/
 import { PeakComponent } from 'src/app/shared/components/peak/peak.component';
 
 const routes: Routes = [
-  // { path: '', redirectTo: 'todo', pathMatch: 'full' },
+  { path: '', redirectTo: 'todo', pathMatch: 'full' },
   {
     path: '',
     component: LayoutAppComponent,

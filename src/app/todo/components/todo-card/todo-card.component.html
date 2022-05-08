@@ -1,6 +1,6 @@
-<div class="min-h-80 w-[600px] bg-gray-200 rounded-2xl p-4">
+<div class="w-[600px] bg-gray-200 rounded-2xl p-4">
   <h2 class="text-4xl font-bold m-4">Todo*</h2>
-  <div id="filter-bar" class="text-right" *ngIf="filter$ | async as filter">
+  <div id="filter-bar" *ngIf="filter$ | async as filter" class="text-right">
     <select class="select" (change)="updateFilter($event)">
       <option value="all" [selected]="filter==='all'">all</option>
       <option value="completed" [selected]="filter==='completed'">completed</option>
@@ -40,7 +40,7 @@
     </form>
   </div>
 <!--
-  <div class="bg-slate-400 mt-4">
+  <div id="peak" class="bg-slate-400 mt-4">
     <pre *ngIf="todos$ | async as todos">{{ todos | json }}</pre>
   </div>
 -->
