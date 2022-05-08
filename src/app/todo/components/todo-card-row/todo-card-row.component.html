@@ -1,0 +1,10 @@
+<th class="text-center">{{ record.id }}</th>
+<td class=""><input type="checkbox" name="isCompleted" [checked]="record.isCompleted" (change)="onToggle($event)" [disabled]="lock" class="checkbox" /></td>
+<td class="text-xl text-left font-serif">
+  <span [attr.contenteditable]="!lock"
+    [textContent]="record.content"
+    (blur)="onBlur($event)"
+    [class.completed]="record.isCompleted"
+    class="break-words"></span>
+</td>
+<td class=""><button class="btn btn-ghost" (click)="onDelete($event) " [disabled]="lock">✕</button></td>

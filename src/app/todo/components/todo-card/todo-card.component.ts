@@ -75,46 +75,15 @@ export class TodoCardComponent implements OnInit {
 
 // #endregion
 
-// #region update a record by toggling checkbox
-
-// modify the copied record and update with the copied & modified record
-// leave the original record alone, which is to be updated by new server data
-
-// disable the button timely
-
-  toggle(e: any, record: Todo) {
-    if (record.isCompleted !== e.target.checked) {
-      e.target.disabled = true;
-      const _record = {...record};
-      _record.isCompleted = e.target.checked;
-      this.service.updateRecord(_record).subscribe(_ => {
-        e.target.disabled = false;
-      });
-    }
+// #region update a record
+  onUpdatedRecord(record: Todo) {
+    this.service.updateRecord(record).subscribe();
   }
-
-// #endregion
-
-// #region update a record by editing
-// check if there is an update, if there is, make a POST request
-
-  onBlur(e: any, record: Todo) {
-    if (record.content !== e.target.textContent) {
-      this.editable = false;
-      const _record = {...record};
-      _record.content = e.target.textContent;
-      this.service.updateRecord(_record).subscribe(_ => this.editable = true);
-    }
-  }
-  editable: boolean = true;
-
 // #endregion
 
 // #region delete a record
-// disable the button timely
-  delete(e:any, id: number) {
-    e.target.disabled = true;
-    this.service.deleteRecord(id).subscribe(_ => e.target.disabled = false);
+  onDeletedRecord(id: number) {
+    this.service.deleteRecord(id).subscribe();
   }
 // #endregion
 
