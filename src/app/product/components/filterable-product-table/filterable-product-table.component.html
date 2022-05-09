@@ -1,0 +1,47 @@
+<div *ngIf="products$ | async as products; else loading"
+  class="grid grid-cols-1 place-items-center h-full w-full">
+  <div class="border-2 p-4">
+    <input type="text" id="search-box" name="search-box" placeholder="Type here" (input)="search(searchBox.value)"
+      #searchBox />
+    <div class="my-4">
+      <label for="in-stock-filter">
+        <input type="checkbox" id="in-stock-filter" [checked]="inStockFilter$ | async"
+          (change)="toggleInStockFilter($event)" /> Only show products in stock
+      </label>
+    </div>
+    <table>
+      <thead>
+        <tr>
+          <th>Name</th>
+          <th>Price</th>
+        </tr>
+      </thead>
+      <tbody>
+        <!--
+    <tr *ngFor="let product of products">
+      <td [class.red]="!product.stocked">{{ product.name }}</td>
+      <td>{{ product.price }}</td>
+    </tr>
+    -->
+        <ng-container *ngFor="let product of products; index as i">
+          <ng-container *ngIf="products[i].category !== products[i-1]?.category">
+            <tr>
+              <td><b>{{ products[i].category }}</b></td>
+            </tr>
+          </ng-container>
+          <tr>
+            <td [class.red]="!product.stocked">{{ product.name }}</td>
+            <td>{{ product.price }}</td>
+          </tr>
+        </ng-container>
+      </tbody>
+    </table>
+  </div>
+
+</div>
+
+<ng-template #loading>
+  <div class="grid grid-cols-1 place-items-center h-full w-full">
+    <p class="font-serif italic">loading ...</p>
+  </div>
+</ng-template>

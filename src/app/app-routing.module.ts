@@ -14,6 +14,7 @@ const routes: Routes = [
     component: LayoutAppComponent,
     children: [
       { path: 'todo', loadChildren: () => import('src/app/todo/todo.module').then(m => m.TodoModule) },
+      { path: 'product', loadChildren: () => import('src/app/product/product.module').then(m => m.ProductModule) },
     ]
   },
   {

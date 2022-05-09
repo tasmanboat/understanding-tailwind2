@@ -13,6 +13,7 @@ import { CoreModule } from './core/core.module';
 
 import { AppComponent } from './app.component';
 // import { TodoModule } from './todo/todo.module';
+// import { ProductModule } from './product/product.module';
 
 @NgModule({
   declarations: [
@@ -25,6 +26,7 @@ import { AppComponent } from './app.component';
     LayoutModule,
     CoreModule,
     // TodoModule, // lazy load
+    // ProductModule, // lazy load
 
 // #region mock server
 /*
