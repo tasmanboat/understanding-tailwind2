@@ -1,4 +1,4 @@
-import { Todo } from "src/app/todo/interfaces/todo";
+import { Todo } from 'src/app/todo/interfaces/todo';
 
 export const TODOS: Todo[] = [
   { id: 1, content: 'sunt in culpa qui officia deserunt mollit anim id est laborum', isCompleted: false, created_at: 1651794310, updated_at: 1651794310 },

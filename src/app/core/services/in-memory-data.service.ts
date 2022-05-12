@@ -1,6 +1,6 @@
 import { Injectable } from '@angular/core';
 import { InMemoryDbService, ResponseOptions } from 'angular-in-memory-web-api';
-import { Todo } from "src/app/todo/interfaces/todo";
+import { Todo } from 'src/app/todo/interfaces/todo';
 import { TODOS } from 'src/app/core/services/mock-todos';
 
 @Injectable({
