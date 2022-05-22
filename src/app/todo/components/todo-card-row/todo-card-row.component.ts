@@ -1,4 +1,5 @@
 import { Component, OnInit, Input, Output, EventEmitter } from '@angular/core';
+import { ChangeDetectionStrategy } from '@angular/core';
 import { Todo } from '../../interfaces/todo';
 
 // a todo row
@@ -7,7 +8,8 @@ import { Todo } from '../../interfaces/todo';
 @Component({
   selector: '[app-todo-card-row]',
   templateUrl: './todo-card-row.component.html',
-  styleUrls: ['./todo-card-row.component.scss']
+  styleUrls: ['./todo-card-row.component.scss'],
+  changeDetection: ChangeDetectionStrategy.OnPush
 })
 export class TodoCardRowComponent implements OnInit {
   // @Input() record!: Todo;
@@ -65,6 +67,13 @@ export class TodoCardRowComponent implements OnInit {
     e.stopPropagation();
     this.lock = true;
     this.deletedRecord.emit(this.record.id);
+  }
+// #endregion
+
+// #region runChangeDetection
+  get runChangeDetection() {
+    console.log('(TodoCardRowComponent) Checking the view');
+    return true;
   }
 // #endregion
 
